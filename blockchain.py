@@ -15,7 +15,7 @@ class BlockChain:
         self.max_height = 0
         self.cur = self.genesis_block
 
-    def create_genesis_block(self):
+    def create_genesis_block(self) -> Block:
         genesis_transactions = [
             Transaction(
                 1,
@@ -46,7 +46,7 @@ class BlockChain:
     def list_all_blocks(self):
         print(self.block_map)
 
-    def add_block(self, newtransactions: list):
+    def add_block(self, newtransactions: list) -> Block:
         newheader = Header(
             self.cur.block_hash,
             newtransactions
