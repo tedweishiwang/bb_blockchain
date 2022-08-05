@@ -10,7 +10,7 @@ NONE_PREV_HASH = "0" * 64
 class BlockChain:
     def __init__(self):
         print("Initializing block chain...")
-        self.block_map = {}  # {height: {block_hash: block}}
+        self.block_map = {}
         self.genesis_block = self.create_genesis_block()
         self.max_height = 0
         self.cur = self.genesis_block
@@ -82,6 +82,7 @@ class BlockChain:
         current_height = self.max_height
 
         while current_block.block_hash != NONE_PREV_HASH:
+            print("Looking for transaction ", transaction_hash, " in block ", current_block.block_hash)
             if transaction_hash in current_block.transactions:
                 return current_block.transactions[transaction_hash]
 
