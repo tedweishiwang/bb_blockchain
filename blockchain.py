@@ -46,25 +46,25 @@ class BlockChain:
     def list_all_blocks(self):
         print(self.block_map)
 
-    def add_block(self, newtransactions: list) -> Block:
-        newheader = Header(
+    def add_block(self, new_transactions: list) -> Block:
+        new_header = Header(
             self.cur.block_hash,
-            newtransactions
+            new_transactions
         )
 
-        newblock = Block(
-            newheader,
-            newtransactions
+        new_block = Block(
+            new_header,
+            new_transactions
         )
 
         self.max_height = self.max_height + 1
         self.block_map[self.max_height] = {}
-        self.block_map[self.max_height][newblock.block_hash] = newblock
-        self.cur = newblock
+        self.block_map[self.max_height][new_block.block_hash] = new_block
+        self.cur = new_block
 
-        print("new block with block hash " + newblock.block_hash + " has been appended.")
+        print("new block with block hash " + new_block.block_hash + " has been appended.")
 
-        return newblock
+        return new_block
 
     def search_block_by_height_and_blockhash(self, block_height, block_hash) -> Optional[Block]:
         if block_height not in self.block_map:
