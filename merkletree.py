@@ -35,31 +35,31 @@ def build_merkle_tree(txs):
 
     level = 1
 
-    nodel = None
-    noder = None
+    node_l = None
+    node_r = None
 
     while len(nodes) > 1:
         newnodelist = []
         for idx in range(0, len(nodes), 2):
             if idx != len(nodes) - 1:
-                nodel, noder = nodes[idx], nodes[idx + 1]
+                node_l, node_r = nodes[idx], nodes[idx + 1]
             else:
-                nodel = nodes[idx]
-                noder = None
-            if noder is None:
-                merged = double_hash(nodel.data + nodel.data)
+                node_l = nodes[idx]
+                node_r = None
+            if node_r is None:
+                merged = double_hash(node_l.data + node_l.data)
             else:
-                merged = double_hash(nodel.data + noder.data)
+                merged = double_hash(node_l.data + node_r.data)
             parent = Node(merged)
-            parent.left = nodel
-            parent.right = noder
+            parent.left = node_l
+            parent.right = node_r
             newnodelist.append(parent)
         nodes = newnodelist
         level += 1
 
     root = nodes[0]
-    root.left = nodel
-    root.right = noder
+    root.left = node_l
+    root.right = node_r
     return root
 
 
