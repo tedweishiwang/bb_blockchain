@@ -39,7 +39,7 @@ def build_merkle_tree(txs):
     node_r = None
 
     while len(nodes) > 1:
-        newnodelist = []
+        new_node_list = []
         for idx in range(0, len(nodes), 2):
             if idx != len(nodes) - 1:
                 node_l, node_r = nodes[idx], nodes[idx + 1]
@@ -53,8 +53,8 @@ def build_merkle_tree(txs):
             parent = Node(merged)
             parent.left = node_l
             parent.right = node_r
-            newnodelist.append(parent)
-        nodes = newnodelist
+            new_node_list.append(parent)
+        nodes = new_node_list
         level += 1
 
     root = nodes[0]
